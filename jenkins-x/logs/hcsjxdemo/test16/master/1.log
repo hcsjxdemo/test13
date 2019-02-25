@@ -1,0 +1,91 @@
+Step: build-step-credential-initializer:
+
+{"level":"warn","ts":1551136439.3201497,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/test\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1551136439.320467,"logger":"fallback-logger","caller":"creds-init/main.go:40","msg":"Credentials initialized."}
+Step: build-step-git-source-0:
+
+{"level":"warn","ts":1551136440.140122,"logger":"fallback-logger","caller":"logging/config.go:65","msg":"Fetch GitHub commit ID from kodata failed: \"ref: refs/heads/test\" is not a valid GitHub commit ID"}
+{"level":"info","ts":1551136446.2313054,"logger":"fallback-logger","caller":"git-init/main.go:92","msg":"Successfully cloned \"https://github.com/hcsjxdemo/test16.git\" @ \"master\" in path \"/workspace\""}
+Step: build-step-jenkins:
+
+Picked up _JAVA_OPTIONS: -Xmx400m
+Started
+Running in Durability level: PERFORMANCE_OPTIMIZED
+  12.233 [id=21]	WARNING	i.f.k.c.i.VersionUsageUtils#alert: The client is using resource type 'customresourcedefinitions' with unstable version 'v1beta1'
+[Pipeline] node
+Running on Jenkins in /tmp/jenkinsTests.tmp/jenkins2033469406872376789test/workspace/job
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withCredentials
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (CI Build and push snapshot)
+Stage "CI Build and push snapshot" skipped due to when conditional
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Release)
+[Pipeline] git
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/hcsjxdemo/test16.git # timeout=10
+Fetching upstream changes from https://github.com/hcsjxdemo/test16.git
+ > git --version # timeout=10
+ > git fetch --tags --progress https://github.com/hcsjxdemo/test16.git +refs/heads/*:refs/remotes/origin/*
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision 67679e185189b745534d69dcf4f71b29ef583be3 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 67679e185189b745534d69dcf4f71b29ef583be3
+ > git branch -a -v --no-abbrev # timeout=10
+ > git branch -D master # timeout=10
+ > git checkout -b master 67679e185189b745534d69dcf4f71b29ef583be3
+Commit message: "Draft create"
+First time build. Skipping changelog.
+[Pipeline] sh
++ jx-release-version
++ echo failed to get new version error fetching tags: %vexit status 128
+[Pipeline] sh
++ cat VERSION
++ jx step tag --version failed to get new version error fetching tags: %vexit status 128
+Tag vfailed created and pushed to remote origin
+[Pipeline] sh
++ npm install
+npm notice created a lockfile as package-lock.json. You should commit this file.
+npm WARN REPLACE_ME@1.0.0 No repository field.
+npm WARN REPLACE_ME@1.0.0 No license field.
+
+up to date in 0.055s
+[Pipeline] sh
++ CI=true DISPLAY=:99 npm test
+
+> REPLACE_ME@1.0.0 test /tmp/jenkinsTests.tmp/jenkins2033469406872376789test/workspace/job
+> echo "no test specified" && exit 0
+
+no test specified
+[Pipeline] sh
++ cat VERSION
++ export VERSION=failed to get new version error fetching tags: %vexit status 128
+/tmp/jenkinsTests.tmp/jenkins2033469406872376789test/workspace/job@tmp/durable-0b94a1b2/script.sh: 1: export: tags:: bad variable name
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Promote to Environments)
+Stage "Promote to Environments" skipped due to earlier failure(s)
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+ERROR: script returned exit code 2
+Finished: FAILURE
